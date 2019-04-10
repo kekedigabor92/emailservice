@@ -16,6 +16,10 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<spock.version>1.2-groovy-2.5</spock.version>
+		<cglib.nodep.version>3.2.0</cglib.nodep.version>
+		<org.objenesis.version>2.1</org.objenesis.version>
+		<groovy.modules.http-builder.version>0.7.1</groovy.modules.http-builder.version>
 	</properties>
 
 	<dependencies>
@@ -47,6 +51,35 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Spock Dependencies -->
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-spring</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- enables mocking of classes (in addition to interfaces) -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib.nodep.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- enables mocking of classes without default constructor (together with
+            CGLIB) -->
+		<dependency>
+			<groupId>org.objenesis</groupId>
+			<artifactId>objenesis</artifactId>
+			<version>${org.objenesis.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.codehaus.groovy.modules.http-builder</groupId>-->
+			<!--<artifactId>http-builder</artifactId>-->
+			<!--<version>${groovy.modules.http-builder.version}</version>-->
+			<!--<scope>test</scope>-->
+		<!--</dependency>-->
 	</dependencies>
 
 	<build>
