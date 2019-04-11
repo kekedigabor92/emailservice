@@ -25,8 +25,7 @@ public class EmailController {
     @PostMapping("/emails")
     public EmailDto sendEmail(@ApiParam(value = "Email object", required = true)
                               @Valid
-                              @RequestBody
-                                      EmailDto email) {
+                              @RequestBody EmailDto email) {
         return emailService.sendEmail(email);
     }
 }

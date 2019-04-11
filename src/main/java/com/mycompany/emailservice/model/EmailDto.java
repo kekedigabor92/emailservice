@@ -38,4 +38,55 @@ public class EmailDto {
     private List<@Pattern(regexp = VALID_EMAIL_REGEXP, message = THE_BLIND_CARBON_COPY_RECIPIENTS_SHOULD_CONTAIN_ONLY_VALID_E_MAIL_ADDRESSES) String>
             blindCarbonCopyRecipients;
 
+    private String subject;
+
+    private String body;
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public List<String> getRecipients() {
+        return recipients;
+    }
+
+    public void setRecipients(List<String> recipients) {
+        this.recipients = recipients;
+    }
+
+    public List<String> getCarbonCopyRecipients() {
+        return carbonCopyRecipients;
+    }
+
+    public void setCarbonCopyRecipients(List<String> carbonCopyRecipients) {
+        this.carbonCopyRecipients = carbonCopyRecipients;
+    }
+
+    public List<String> getBlindCarbonCopyRecipients() {
+        return blindCarbonCopyRecipients;
+    }
+
+    public void setBlindCarbonCopyRecipients(List<String> blindCarbonCopyRecipients) {
+        this.blindCarbonCopyRecipients = blindCarbonCopyRecipients;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 }

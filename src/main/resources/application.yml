@@ -2,3 +2,6 @@ server:
   port: 8085
   servlet:
     context-path: /emailservice/api
+
+email-service-provider:
+  apikey: "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"
