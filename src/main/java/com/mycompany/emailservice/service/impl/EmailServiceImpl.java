@@ -34,7 +34,7 @@ public class EmailServiceImpl implements EmailService {
             System.out.println(send.getStatusCode());
 
         } catch (IOException ex) {
-            System.out.println("error occcured");
+           // TODO handle exception properly
         }
         return email;
     }
