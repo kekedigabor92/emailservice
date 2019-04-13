@@ -1,4 +1,4 @@
-package com.mycompany.emailservice.configuration;
+package com.mycompany.emailservice.configuration.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
