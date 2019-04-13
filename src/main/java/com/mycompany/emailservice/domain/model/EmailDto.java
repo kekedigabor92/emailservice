@@ -61,6 +61,7 @@ public class EmailDto {
             blindCarbonCopyRecipients;
 
     @NotBlank(message = SUBJECT_NOT_BLANK_ERROR)
+    @ApiModelProperty(required = true, name = "The subject, should be at least one character long.")
     private String subject;
 
     private String body;
