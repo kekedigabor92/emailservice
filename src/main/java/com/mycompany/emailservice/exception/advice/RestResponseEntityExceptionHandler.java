@@ -1,7 +1,7 @@
 package com.mycompany.emailservice.exception.advice;
 
 import com.mycompany.emailservice.domain.model.ErrorDetailsDto;
-import com.mycompany.emailservice.exception.EmailServiceException;
+import com.mycompany.emailservice.exception.EmailServiceValidationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +30,14 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         String defaultMessage = fieldError.getDefaultMessage();
         Map<String, Object> errorVariables = new HashMap<>();
         errorVariables.put("Rejected value: ", fieldError.getRejectedValue());
-        ErrorDetailsDto errorDetailsDto = new ErrorDetailsDto(LocalDateTime.now(), HttpStatus.BAD_REQUEST, defaultMessage, errorVariables);
+        ErrorDetailsDto errorDetailsDto = new ErrorDetailsDto(HttpStatus.BAD_REQUEST, defaultMessage, errorVariables);
         return new ResponseEntity(errorDetailsDto, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = {EmailServiceException.class})
+    @ExceptionHandler(value = {EmailServiceValidationException.class})
     protected ResponseEntity<Object> handleEmailServiceException(RuntimeException ex, WebRequest request) {
-        EmailServiceException emailServiceException = (EmailServiceException) ex;
-        ErrorDetailsDto errorDetailsDto = emailServiceException.getErrorDetailsDto();
+        EmailServiceValidationException emailServiceValidationException = (EmailServiceValidationException) ex;
+        ErrorDetailsDto errorDetailsDto = emailServiceValidationException.getErrorDetailsDto();
         return handleExceptionInternal(ex, errorDetailsDto, new HttpHeaders(), errorDetailsDto.getHttpStatus(), request);
     }
 

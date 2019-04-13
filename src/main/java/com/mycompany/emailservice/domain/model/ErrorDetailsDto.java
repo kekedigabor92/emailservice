@@ -23,13 +23,6 @@ public class ErrorDetailsDto {
         this.errorVariable = errorVariable;
     }
 
-    public ErrorDetailsDto(LocalDateTime dateTime, HttpStatus httpStatus, String message, Map<String, Object> errorVariable) {
-        this.dateTime = dateTime;
-        this.httpStatus = httpStatus;
-        this.message = message;
-        this.errorVariable = errorVariable;
-    }
-
     public LocalDateTime getDateTime() {
         return dateTime;
     }

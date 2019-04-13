@@ -1,6 +1,5 @@
-package com.mycompany.emailservice.model
+package com.mycompany.emailservice.domain.model
 
-import com.mycompany.emailservice.domain.model.EmailDto
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll

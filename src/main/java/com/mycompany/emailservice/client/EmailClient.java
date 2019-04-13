@@ -21,5 +21,4 @@ public class EmailClient {
         request.setBody(mail.build());
         return sendGrid.api(request);
     }
-
 }
