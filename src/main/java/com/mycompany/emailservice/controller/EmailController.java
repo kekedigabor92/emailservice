@@ -1,9 +1,10 @@
 package com.mycompany.emailservice.controller;
 
+import com.mycompany.emailservice.domain.model.EmailDto;
 import com.mycompany.emailservice.service.EmailService;
-import com.mycompany.emailservice.model.EmailDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +24,10 @@ public class EmailController {
 
     @ApiOperation(value = "Send an email")
     @PostMapping("/emails")
-    public EmailDto sendEmail(@ApiParam(value = "Email object", required = true)
-                              @Valid
-                              @RequestBody EmailDto email) {
-        return emailService.sendEmail(email);
+    public ResponseEntity<EmailDto> sendEmail(@ApiParam(value = "Email object", required = true)
+                                              @Valid
+                                              @RequestBody EmailDto email) {
+        EmailDto emailDto = emailService.sendEmail(email);
+        return ResponseEntity.accepted().body(emailDto);
     }
 }

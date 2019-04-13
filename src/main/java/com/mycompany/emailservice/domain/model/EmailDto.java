@@ -1,4 +1,4 @@
-package com.mycompany.emailservice.model;
+package com.mycompany.emailservice.domain.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

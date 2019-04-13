@@ -1,6 +1,6 @@
 package com.mycompany.emailservice.controller
 
-import com.mycompany.emailservice.model.EmailDto
+import com.mycompany.emailservice.domain.model.EmailDto
 import com.mycompany.emailservice.service.EmailService
 import spock.lang.Shared
 import spock.lang.Specification

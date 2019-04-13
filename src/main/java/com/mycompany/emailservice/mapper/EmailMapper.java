@@ -1,6 +1,6 @@
 package com.mycompany.emailservice.mapper;
 
-import com.mycompany.emailservice.model.EmailDto;
+import com.mycompany.emailservice.domain.model.EmailDto;
 import com.sendgrid.Content;
 import com.sendgrid.Email;
 import com.sendgrid.Mail;

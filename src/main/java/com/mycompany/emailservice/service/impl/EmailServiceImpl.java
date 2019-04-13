@@ -3,7 +3,7 @@ package com.mycompany.emailservice.service.impl;
 import com.mycompany.emailservice.client.EmailClient;
 import com.mycompany.emailservice.service.EmailService;
 import com.mycompany.emailservice.mapper.EmailMapper;
-import com.mycompany.emailservice.model.EmailDto;
+import com.mycompany.emailservice.domain.model.EmailDto;
 import com.sendgrid.Mail;
 import com.sendgrid.Response;
 import org.slf4j.Logger;
@@ -27,8 +27,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public EmailDto sendEmail(EmailDto email) {
+        LOGGER.info("Mapping email: {}", email);
         Mail mail = emailMapper.toEmail(email);
-        LOGGER.info("Sending email: {}", email);
+        LOGGER.info("Sending mapped email: {}", mail);
         try {
             Response send = emailClient.send(mail);
             System.out.println(send.getStatusCode());

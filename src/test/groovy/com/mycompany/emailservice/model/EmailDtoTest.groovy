@@ -1,5 +1,6 @@
 package com.mycompany.emailservice.model
 
+import com.mycompany.emailservice.domain.model.EmailDto
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -48,7 +49,7 @@ class EmailDtoTest extends Specification {
 
         then:
         !violations.isEmpty()
-        violations.asList().find { it.getMessage() == violationMessage }
+        violations.asList().find { it.message == violationMessage }
 
         where:
         sender                  | recipients                | ccr                       | bccr                      | subject | violationMessage

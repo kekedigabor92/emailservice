@@ -1,12 +1,14 @@
-package com.mycompany.emailservice.model;
+package com.mycompany.emailservice.domain.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
 public class ErrorDetailsDto {
 
     private LocalDateTime dateTime;

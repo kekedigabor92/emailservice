@@ -1,6 +1,7 @@
-package com.mycompany.emailservice.exception;
+package com.mycompany.emailservice.exception.advice;
 
-import com.mycompany.emailservice.model.ErrorDetailsDto;
+import com.mycompany.emailservice.domain.model.ErrorDetailsDto;
+import com.mycompany.emailservice.exception.EmailServiceException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
