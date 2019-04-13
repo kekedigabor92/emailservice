@@ -32,7 +32,8 @@ public class EmailDto {
     static final String BLIND_CARBON_COPY_RECIPIENTS_CONTAINS_NULL_ERROR_MESSAGE = "The blindCarbonCopyRecipients should not contain null.";
     static final String BLIND_CARBON_COPY_RECIPIENT_TOO_LONG_ERROR_MESSAGE = "The maximum length of a blind carbon copy recipient is " + EMAIL_ADDRESS_MAX_LENGTH;
     static final String BLIND_CARBON_COPY_RECIPIENTS_CONTAIN_INVALID_EMAIL_ERROR_MESSAGE = "The blindCarbonCopyRecipients should contain only valid e-mail addresses.";
-    static final String SUBJECT_NOT_BLANK_ERROR = "The subject field should contain at least one character.";
+    static final String SUBJECT_NOT_BLANK_ERROR = "The subject should contain at least one character.";
+    static final String BODY_NOT_BLANK_ERROR = "The body should contain at least one character.";
 
     @NotNull(message = SENDER_NULL_ERROR_MESSAGE)
     @Length(max = EMAIL_ADDRESS_MAX_LENGTH, message = SENDER_TOO_LONG_ERROR_MESSAGE)
@@ -64,6 +65,8 @@ public class EmailDto {
     @ApiModelProperty(required = true, name = "The subject, should be at least one character long.")
     private String subject;
 
+    @NotBlank(message = BODY_NOT_BLANK_ERROR)
+    @ApiModelProperty(required = true, name = "The body, should be at least one character long.")
     private String body;
 
     public String getSender() {
