@@ -1,9 +1,9 @@
 package com.mycompany.emailservice.service.impl;
 
 import com.mycompany.emailservice.client.EmailClient;
+import com.mycompany.emailservice.service.EmailService;
 import com.mycompany.emailservice.mapper.EmailMapper;
 import com.mycompany.emailservice.model.EmailDto;
-import com.mycompany.emailservice.service.EmailService;
 import com.sendgrid.Mail;
 import com.sendgrid.Response;
 import org.slf4j.Logger;

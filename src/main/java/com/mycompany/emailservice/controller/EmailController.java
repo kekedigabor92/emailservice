@@ -1,7 +1,7 @@
 package com.mycompany.emailservice.controller;
 
-import com.mycompany.emailservice.model.EmailDto;
 import com.mycompany.emailservice.service.EmailService;
+import com.mycompany.emailservice.model.EmailDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PostMapping;

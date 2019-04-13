@@ -14,11 +14,11 @@ public class EmailClient {
         this.sendGrid = sendGrid;
     }
 
-    public Response send(Mail email) throws IOException {
+    public Response send(Mail mail) throws IOException {
         Request request = new Request();
         request.setMethod(Method.POST);
         request.setEndpoint("mail/send");
-        request.setBody(email.build());
+        request.setBody(mail.build());
         return sendGrid.api(request);
     }
 
