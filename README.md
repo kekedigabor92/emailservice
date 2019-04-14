@@ -1,8 +1,8 @@
 # emailservice
 Email Service with Spring Boot
 
-[![Build Status](https://travis-ci.org/kekedigabor92/emailservice/builds)](https://travis-ci.org/kekedigabor92/emailservice/builds)
-[![HEROKU](https://kekedigabor92-emailservice.herokuapp.com/emailservice/api/swagger-ui.html)](https://kekedigabor92-emailservice.herokuapp.com/emailservice/api/swagger-ui.html)
+[![Build Status](https://travis-ci.org/kekedigabor92/emailservice.svg?branch=dev)](https://travis-ci.org/kekedigabor92/emailservice/builds)
+[![HEROKU](https://github.com/heroku/favicon/raw/master/favicon.iconset/icon_32x32.png)](https://kekedigabor92-emailservice.herokuapp.com/emailservice/api/swagger-ui.html)
 
 ## Requirements
 
