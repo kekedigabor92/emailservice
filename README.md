@@ -37,14 +37,14 @@ Make sure you start the application first on the proper port.
 
 The Java 8 and Spring Boot combination was basically expected in the task, but I would have chosen these anyways.
 
-I decided to use groovy for unit testing purposes as I find it very concise and easy to read.
+I decided to use groovy for testing purposes as I find it very concise and easy to read.
 In addition to that, the possibility and especially the way of creating parameterized tests is 
 overwhelmingly impressive for me. To keep the build time short, most unit tests do not start up the the spring context
 but rather only utilize mocked instances. There is one test class though, responsible for checking if the spring app could start.
-I like to keep this class as it reveals possible problems for example with dependency injection in build time and we can avoid
-issues when starting the app. Almost every time I use constructor injection since in my opinion it is easier to read,
-we can see if we have too many arguments for a class as opposed to the way when we have the @Autowired on the fields.
-Plus, Autowired can be omitted for classes with one constructor. 
+I like to have this class as it reveals possible dependency injection problems in build time and we can avoid these
+issues during startup. Almost every time I use constructor injection since in my opinion it is easier to read,
+we can see if we start having too many arguments for a class as opposed to setter-based injection.
+Plus, @Autowired can be omitted for classes with one constructor. 
 
 I provided a simple swagger documentation, however it is not sufficient for testing purposes.
 
@@ -59,7 +59,7 @@ The standard javax.validation is used in order to validate the format of the req
 As a result the validation in the service layer can be much simpler, we can ensure for instance that mandatory 
 fields will not be null and the populated fields will in proper format. 
 
-Additional validations needed to be applied in order our for API to be compliant with SendGrid.
+Additional validations needed to be applied in order for our API to be compliant with SendGrid.
 These include for example total recipient limit, e-mail address uniqueness. 
 
 Based on the SendGrid's error page, I implemented all validations (hopefully) for the currently supported functionality to prevent requests resulting in 400 error.
@@ -68,8 +68,10 @@ https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html
 As the service needs to deal with multiple clients simultaneously, the logging output needs to be differentiated from one client to another.
 Here comes MDC in the picture. A UUID is associated to each request along with the request url and these can be easily added to the logging configuration. 
 
-For CI/CD, Travis CI seemed to be the simplest and easiest way to go. It gives support to deploy to Heroku, which is free cloud provider.
+For CI/CD, Travis CI seemed to be the simplest and easiest way to go. It supports deployment to Heroku, which is free cloud provider.
 Opting for docker was not a question, as it is the leading container platform.
 
 Regarding version control and branching, please note that I pushed my changes directly to dev. 
-In my opinion it would have been overkill to create feature branches and PR-s just for myself.
+In my opinion it would have been overkill to create feature branches and PR-s just for myself, so I just kept it simple.
+
+Thanks again for the opportunity. :)  
