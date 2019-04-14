@@ -30,7 +30,7 @@ mvn integration-test
 ``` 
 
 Alternatively you can use the POSTemails.http for manual testing.
-It is a nice option as you do not have leave the IDEA to fire a request.
+It is a nice option as you do not have to leave the IDEA to fire a request.
 Make sure you start the application first on the proper port.
 
 ## Details of the submission, design and implementation decisions
@@ -39,7 +39,7 @@ The Java 8 and Spring Boot combination was basically expected in the task, but I
 
 I decided to use groovy for testing purposes as I find it very concise and easy to read.
 In addition to that, the possibility and especially the way of creating parameterized tests is 
-overwhelmingly impressive for me. To keep the build time short, most unit tests do not start up the the spring context
+overwhelmingly impressive for me. To keep the build time short, most unit tests do not start up the spring context
 but rather only utilize mocked instances. There is one test class though, responsible for checking if the spring app could start.
 I like to have this class as it reveals possible dependency injection problems in build time and we can avoid these
 issues during startup. Almost every time I use constructor injection since in my opinion it is easier to read,
