@@ -12,14 +12,9 @@ cache:
   directories:
     - '$HOME/.m2/repository'
 
-env:
-  global:
-    -secure: "AYJHyqeT+uosAjLGnNnX4J8lV/r4CoIsfiW1nSQu/qeGjWFt8yVaj+WHPx/A7f68jVC6fx8N5BXtbqm4AHRhYyq45aC63OPWg7xHbaM+T+e0Tf8QngcSn8R9MMoo9wsP5d7vWwDg5ljkpnYfWrtvkkXsO30+RyZmw4FL2tHGf7M7Yxbg+TRTdu4tRujUkFhLJr4MqmayshgVye3ksKEpAYNLpMSur5ZLldfd7vhPuTEoVwc3XHd2W0qDrwmfy53LcMoHGvT9FAAQVJGskRSd3JveFF1d7EapYDlbXl4JPvXXha+7yhW7BBvXFeefPbMnununKwJyo5eTG6ExVgb8COrwjF1eRCfPgX69vYbemjnIV6ee9scYt2+hpO5eiOb94gISyueplSCyv8A1nn9ZfLtlS05KHu/zXQaQlIhP7lXtd1xg8s6jq3JaMENX8dJk4BHnGQ0RUFDmqpOJpfuJfamr3Eewa7eCLb3QlG1Kr9r3nM/PAoJmcXJ97Je60ggpb/uJGuV/HDQkCo/e4kwXIDsHN40Udtj5MphDwnTDtAriypClEjO4QL4TccYlPC0WrKHJwvI0X9N7v0Y0dbGTbkrUmakyFxFrXB/0hl0xSeu5i1ZWw8VLSHivoNL6AplxbIMdU6RNmlFEZTZ1Dl+gYZ2eSQztVtQWMWP/05tmcmc="
-    -secure: "FQ4igja44Xq1SokwKVTbPmMr7tV2OjGDyW1O4btSmnetfSZAv/mfzS3JFXxjE9mkQBS7nd3KHHvu1FL3CDzxKNsErL0FMx5Oo5YKtVbVbtGurzYT8Xz3ieORQkWPDw0Q5k1t6M2Rd4/KyPUK+pKgSGzKlMs+TDZ/h6DYk2xfUEsAbsRuQTWfVtV6DvR+nT8qUxw24BTB/R395CTqepeTDiHKtRh0ehKFl7z3oUVSPQ80u7otKiwz1lI0vWiMbTJ8YDcDCoxymWvNIBhmhv7EUfPL03SfCJQfFb//Y2zOOid6tvs6dAEmaD+UbrDAJBPjK7l+CJOE6kHpyUSLkAFnZzJJpfRE2VH6jbviEEZchdU5kGZopFCRWcJBSPH4MUVmwQ8zo8iM4ItOvzZpKVQQVX9UNyrXVv3zcCzHsVY7b3OitV5+q+WzUvZ3IbHrFiazXwO2QmIEW9ZaH87JY7bLdz1O1wEOtEGzdeoo2TBqQWUZbn73YWaY1AzXto0PWKnwS1oMN6HuYPXuIhLnKgV/BVMVg+awd1qj0moAFsNvxCrpDdKxoCVZ57rFjJblmuZO8E8yws0cN0xun8S0Y0+anIqzm6U2rqtYL4uFvoKcyQuBlchV4w23qbXqHzNjiw4lyRan2DErFp28AlTK/yHSsV+To8fV2UwgA7J18rA1e3Y="
-
 after_success:
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "dev" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
   - export IMAGE_NAME=kekedigabor92/emailservice
   - docker build -t $IMAGE_NAME:$COMMIT .
   - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
