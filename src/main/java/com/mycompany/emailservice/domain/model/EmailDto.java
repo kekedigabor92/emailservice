@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Data
-@ApiModel(description = "All details about the email.")
+@ApiModel(description = "Detailed description of the email.")
 public class EmailDto {
 
     private static final int EMAIL_ADDRESS_MAX_LENGTH = 320;
