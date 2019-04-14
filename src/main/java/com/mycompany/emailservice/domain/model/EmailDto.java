@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -38,23 +39,25 @@ public class EmailDto {
     @NotNull(message = SENDER_NULL_ERROR_MESSAGE)
     @Length(max = EMAIL_ADDRESS_MAX_LENGTH, message = SENDER_TOO_LONG_ERROR_MESSAGE)
     @Pattern(regexp = VALID_EMAIL_REGEXP, message = SENDER_INVALID_ERROR_MESSAGE)
-    @ApiModelProperty(required = true, name = "The sender email address")
+    @ApiModelProperty(required = true, name = "The sender email address", value = "sender@test.com")
     private String sender;
 
     @NotEmpty(message = RECIPIENTS_IS_MANDATORY_ERROR_MESSAGE)
-    @ApiModelProperty(required = true, name = "The recipients email addresses")
+    @ApiModelProperty(required = true, name = "The recipients email addresses", value = "\"recipient@test.com\"")
     private List<
             @NotNull(message = RECIPIENTS_CONTAINS_NULL_ERROR_MESSAGE)
             @Length(max = EMAIL_ADDRESS_MAX_LENGTH, message = RECIPIENT_TOO_LONG_ERROR_MESSAGE)
             @Pattern(regexp = VALID_EMAIL_REGEXP, message = RECIPIENTS_CONTAINS_INVALID_EMAIL_ERROR_MESSAGE) String>
             recipients;
 
+    @ApiModelProperty(required = true, name = "The carbon copy recipients email addresses", value = "\"ccr@test.com\"")
     private List<
             @NotNull(message = CARBON_COPY_RECIPIENTS_CONTAINS_NULL_ERROR_MESSAGE)
             @Length(max = EMAIL_ADDRESS_MAX_LENGTH, message = CARBON_COPY_RECIPIENT_TOO_LONG_ERROR_MESSAGE)
             @Pattern(regexp = VALID_EMAIL_REGEXP, message = CARBON_COPY_RECIPIENTS_CONTAINS_INVALID_EMAIL_ERROR_MESSAGE) String>
             carbonCopyRecipients;
 
+    @ApiModelProperty(required = true, name = "The blind carbon copy recipients email addresses", value = "\"bccr@test.com\"")
     private List<
             @NotNull(message = BLIND_CARBON_COPY_RECIPIENTS_CONTAINS_NULL_ERROR_MESSAGE)
             @Length(max = EMAIL_ADDRESS_MAX_LENGTH, message = BLIND_CARBON_COPY_RECIPIENT_TOO_LONG_ERROR_MESSAGE)
@@ -62,11 +65,11 @@ public class EmailDto {
             blindCarbonCopyRecipients;
 
     @NotBlank(message = SUBJECT_NOT_BLANK_ERROR)
-    @ApiModelProperty(required = true, name = "The subject, should be at least one character long.")
+    @ApiModelProperty(required = true, name = "The subject, should be at least one character long.", value = "subject")
     private String subject;
 
     @NotBlank(message = BODY_NOT_BLANK_ERROR)
-    @ApiModelProperty(required = true, name = "The body, should be at least one character long.")
+    @ApiModelProperty(required = true, name = "The body, should be at least one character long.", value = "this is a body")
     private String body;
 
     public String getSender() {

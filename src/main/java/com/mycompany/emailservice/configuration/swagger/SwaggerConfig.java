@@ -23,6 +23,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.mycompany.emailservice.controller"))
                 .paths(PathSelectors.any())
                 .build()
+                .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo());
     }
 
