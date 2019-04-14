@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Component
 public class MdcHandlerInterceptor extends HandlerInterceptorAdapter {
+
     private static final StringBuffer QUERY_SEPARATOR = new StringBuffer("?");
 
     private final RequestContext requestContext;

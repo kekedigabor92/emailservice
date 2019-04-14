@@ -23,9 +23,9 @@ public class EmailServiceImpl implements EmailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmailServiceImpl.class);
 
-    private EmailMapper emailMapper;
-    private EmailValidator emailValidator;
-    private EmailClient emailClient;
+    private final EmailMapper emailMapper;
+    private final EmailValidator emailValidator;
+    private final EmailClient emailClient;
 
     public EmailServiceImpl(EmailValidator emailValidator, EmailMapper emailMapper, EmailClient emailClient) {
         this.emailMapper = emailMapper;

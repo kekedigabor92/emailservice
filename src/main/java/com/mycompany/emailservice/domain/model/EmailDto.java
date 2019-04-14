@@ -17,7 +17,7 @@ public class EmailDto {
 
     private static final int EMAIL_ADDRESS_MAX_LENGTH = 320;
 
-    static final String VALID_EMAIL_REGEXP = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+    private static final String VALID_EMAIL_REGEXP = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
     static final String SENDER_NULL_ERROR_MESSAGE = "The sender value is mandatory and it should be a valid e-mail address.";
     static final String SENDER_TOO_LONG_ERROR_MESSAGE = "The maximum length of the sender is " + EMAIL_ADDRESS_MAX_LENGTH;

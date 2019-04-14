@@ -9,6 +9,7 @@ import java.util.UUID;
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class RequestContext {
+
     private final UUID requestId;
 
     public RequestContext() {

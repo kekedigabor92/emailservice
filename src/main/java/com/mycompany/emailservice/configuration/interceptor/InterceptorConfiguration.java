@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
 
-    private MdcHandlerInterceptor mdcHandlerInterceptor;
+    private final MdcHandlerInterceptor mdcHandlerInterceptor;
 
     public InterceptorConfiguration(MdcHandlerInterceptor mdcHandlerInterceptor) {
         this.mdcHandlerInterceptor = mdcHandlerInterceptor;

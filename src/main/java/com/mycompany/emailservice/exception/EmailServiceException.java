@@ -4,7 +4,7 @@ import com.mycompany.emailservice.domain.model.ErrorDetailsDto;
 
 public class EmailServiceException extends RuntimeException {
 
-    private ErrorDetailsDto errorDetailsDto;
+    private final ErrorDetailsDto errorDetailsDto;
 
     public EmailServiceException(ErrorDetailsDto errorDetailsDto) {
         this.errorDetailsDto = errorDetailsDto;

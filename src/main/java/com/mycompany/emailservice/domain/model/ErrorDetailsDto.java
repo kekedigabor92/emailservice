@@ -1,5 +1,6 @@
 package com.mycompany.emailservice.domain.model;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 @Data
 @NoArgsConstructor
+@ApiModel(description = "Error object in case of 4xx, 5xx responses.")
 public class ErrorDetailsDto {
 
     private LocalDateTime dateTime;

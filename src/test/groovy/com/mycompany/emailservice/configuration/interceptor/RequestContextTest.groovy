@@ -10,8 +10,8 @@ class RequestContextTest extends Specification {
         def requestContextTwo = new RequestContext()
 
         when:
-        def firstId = requestContextOne.getRequestId();
-        def secondId = requestContextTwo.getRequestId();
+        def firstId = requestContextOne.getRequestId()
+        def secondId = requestContextTwo.getRequestId()
 
         then:
         firstId

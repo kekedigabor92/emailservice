@@ -8,7 +8,7 @@ import java.io.IOException;
 @Component
 public class EmailClient {
 
-    private SendGrid sendGrid;
+    private final SendGrid sendGrid;
 
     public EmailClient(SendGrid sendGrid) {
         this.sendGrid = sendGrid;
