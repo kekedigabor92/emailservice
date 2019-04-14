@@ -19,3 +19,11 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 ```shell
 mvn spring-boot:run
 ```
+
+## Testing the application locally
+
+The EmailServiceApplicationIT class file contains integration tests that can be easily run from the IDEA. 
+
+Alternatively you can use the POSTemails.http for manual testing.
+It is a nice option as you do not have leave the IDEA to fire a request.
+Make sure you start the application first on the proper port.
