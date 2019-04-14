@@ -70,3 +70,6 @@ Here comes MDC in the picture. A UUID is associated to each request along with t
 
 For CI/CD, Travis CI seemed to be the simplest and easiest way to go. It gives support to deploy to Heroku, which is free cloud provider.
 Opting for docker was not a question, as it is the leading container platform.
+
+Regarding version control and branching, please note that I pushed my changes directly to dev. 
+In my opinion it would have been overkill to create feature branches and PR-s just for myself.
