@@ -8,9 +8,6 @@ services:
 before_install:
   - chmod +x mvnw
 
-script:
-  - ./mvnw clean install -B
-
 cache:
   directories:
     - '$HOME/.m2/repository'
