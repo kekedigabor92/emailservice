@@ -2,6 +2,9 @@ sudo: required
 language: java
 jdk: oraclejdk8
 
+services:
+  - docker
+
 before_install:
   - chmod +x mvnw
 
@@ -11,3 +14,22 @@ install:
 cache:
   directories:
     - '$HOME/.m2/repository'
+
+env:
+  global:
+    -secure: "RG8nYsMdoARPF8Nkr6o5iih+Ku9+1y2Sp1S+G5grnaRYpXKnwS9PjVIjZvnPpbZ3IhyjMR3YXNfyk/toqHMlBk0sDNt4c6Gr5fzzGUcB4hGeIDmjkbEmeOCfujJxKFZNGRWvL0CgSfPq8G7IXKRgG74cdjy//wqkC/2x/ahT0sUDbYJFu3vSdUvLoRFCtQroHjofLSUgiJfDz1nGCW5ct5oKKVgBqr+ewZmYAbX4UzRm1ka6NegAijx/MEIYQICzOyQUJumoXJLPkKEfuTK4sOyhrvcIVvhKmSZ6ACDGXP3I8MkSCJ+uLSHfRfQ2H8FdaqPX/U/HKqekPWP6KOaSLd86z6RDN1VaCnzf7LF8VNgRQT0lcB0SbEZZrrN4AIr4Wpa10kcVR10u8iKXFAlNmVILMAMuYTzEb71dOp+v6eYBlXrgpqOlUeKZRrYwET1dxJ64LXTwBxxsin8A9d309SUmlmoxnEqih7eHmVD47mIgpWPB9An6Num4gXDvuf+kh/blK1infTcxEgs9o3H4gJxX1Ur5XbE7ENYX5O+zAkS4twKoi1nHiERIIrhQYZVd2UMDaR2fAryDLKup5V47Y2ON4NfvzSzagzh/sDBBFkf/ZkUU6kwGOvc0mERnVWn2KYOD4cHSjHr4gDhzWBN7eoiq4Cd4gffflWoxCtSqPbE="
+    -secure: "px7SHtIlG1r07sePoyvKM/gTNKu0JevOGMUl8mfeeCWdty65yBVHHzUhtZNxIvG2412DHbwDb1G12/OrXXV6ouJ/kXCR1daiqscWTYtvefBA5oyy75Rfjg7rz5Xl567h/gcX183k0HjQiGiKiAHSL8IDxK0/TJMHGileYkxEBjsCSLhEV0BuSNAOgJQTZtJFTzGth9DPe7rI0zwf4XPma8MCVAAzhVtUr6mcDE06K1fDNHJNEsrLCsLz9ziltm2NCFJlb42RJEwXjnTO2KIuaPWvrIxHQByjsy89NbSEg6jctqyKB8OmOkz//0B6kLl7jNmKvpiAAzQ20fQ4E6cBbV0toZck/FZ10SRl2tVYFogVuh72xi7H3IzgUB98/vrJAo0ggH2A+ZJBDkoirdXxaVB9u65clEJntNnjV+AsWTHKjR63oyESV4ozuFP8p0N5s7mdR2oYv6i2h5qHn5JAftQR/HQAevo1Rhd4YAi9dDs8UMVfYcXcbnrRTjnmz2VwuW6Z+zUVy/5J0jV3IOXxJGLHfc2hULzNAtnLVOgoD1NDB2wv3NtXI3HSS06Yt7ZLVHBFEA/d/GqKBdZ0Ask2ePMiafeLd0oiy6jaJjUBY73mHwzJq+yS3ipzVCP4nsdMrwV9bjJ4sOjPzAXHQHluGjaCx6SzRAe2SSsjI3H9TnY="
+    -secure: "OFoov9v5rc7e7n5bnrADNk8ZJaG3nF9goAo+Rn+VhKyL22YIQroi67Kgmy3FcORzq5JpqoZNE/TVVBgz+DcX4ujgp3ZJjsjmTAptKUQzxdZ/dNhi3pSSsL5FA8vwWAknluDeVHqRZ4Ijkn7/VtKoFfhGKTMnCQXIfX00z+jqiPfBEG0VtNC/qHryxMazP9UwVnNShZddo03frkL9t8qOLIz38XhU1pJ55LoTPxl24o/Xc2nZIwV5S2COAA4EWxc8m+LpaWs1Ny9GUNhGB7YWtIFDVda214wY4ik7GwJziJt5ONyEc9RS/wKIDzgqMimXFvXFl9BtFHWs6HFs+ZrVfOFtJhrqNooF/uuq0LAQMxQljSOwc1teIzGKYSYZTb5Gb8j/wDJYqgxU7jn68b2/oYkraWBtBzn8JIg1GcQmZvPVrvPURZ7ei+DRIJ/UCuFDV1glVKIljRNN21q6HbcEkKpYXxzqkpPcaqqghNVUmsnI9Pxrb90XMj10Kw5X9imD+EIAswwjvjIL9uLspbmIOUH67nwHGfZwGvokIKiYfgvEoN5e4p3lIy167R5vv04ZvUorZ5g2zaQEF8Mdk/zP6dD+6Ou+GoKlM/vgSE1a+CJU3K3VuniMgQv8jHGmul1Ngi8jsdSC3KT45Tv0ZGO9evPrGpLrJRou4132ug3dXBA="
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+  - export IMAGE_NAME=kekedigabor92/emailservice
+  - docker build -t $IMAGE_NAME:$COMMIT .
+  - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+  - docker push $IMAGE_NAME
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: kekedigabor92-emailservice
