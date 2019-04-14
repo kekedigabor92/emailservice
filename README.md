@@ -31,7 +31,8 @@ mvn integration-test
 
 Alternatively you can use the POSTemails.http for manual testing.
 It is a nice option as you do not have to leave the IDEA to fire a request.
-Make sure you start the application first on the proper port.
+Make sure you start the application first on the proper port or 
+you also have the possibility to send requests against the instance deployed in Heroku.
 
 ## Details of the submission, design and implementation decisions
 
