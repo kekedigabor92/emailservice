@@ -1,0 +1,13 @@
+POST http://localhost:8085/emailservice/api/v1/emails
+Content-Type: application/json
+
+{
+    "sender": "test@test.com",
+    "recipients":["youremail@yourdomain.com"],
+    "carbonCopyRecipients": null,
+    "blindCarbonCopyRecipients": null,
+    "subject": "This is a subject",
+    "body": "This is a body"
+}
+
+###
