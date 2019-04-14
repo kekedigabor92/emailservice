@@ -1,15 +1,15 @@
 package com.mycompany.emailservice.domain.validator;
 
+import com.google.common.collect.ImmutableMap;
 import com.mycompany.emailservice.domain.model.EmailDto;
 import com.mycompany.emailservice.domain.model.ErrorDetailsDto;
 import com.mycompany.emailservice.exception.EmailServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class EmailValidator {
@@ -19,7 +19,7 @@ public class EmailValidator {
 
     public void validateEmail(EmailDto emailDto) {
         validateTotalRecipientSize(emailDto);
-        validateNoDuplicateIsPresentInAnyRecipientList(emailDto);
+        validateDuplicates(emailDto);
     }
 
     private void validateTotalRecipientSize(EmailDto emailDto) {
@@ -33,44 +33,28 @@ public class EmailValidator {
         }
     }
 
-    private void validateNoDuplicateIsPresentInAnyRecipientList(EmailDto emailDto) {
-        List<String> recipients = emailDto.getRecipients();
-        List<String> carbonCopyRecipients = emailDto.getCarbonCopyRecipients();
-        List<String> blindCarbonCopyRecipients = emailDto.getBlindCarbonCopyRecipients();
+    private void validateDuplicates(EmailDto emailDto) {
+        Optional<List<String>> recipients = Optional.ofNullable(emailDto.getRecipients());
+        Optional<List<String>> carbonCopyRecipients = Optional.ofNullable(emailDto.getCarbonCopyRecipients());
+        Optional<List<String>> blindCarbonCopyRecipients = Optional.ofNullable(emailDto.getBlindCarbonCopyRecipients());
 
-        recipients.forEach(recipient -> {
-            validateRecipientIsPresentOnlyOnce(recipients, recipient);
+        Set<String> uniques = new HashSet<>();
+        Set<String> duplicates = Stream.of(recipients, carbonCopyRecipients, blindCarbonCopyRecipients)
+                .flatMap(this::toStream)
+                .filter(e -> !uniques.add(e))
+                .collect(Collectors.toSet());
 
-            if (carbonCopyRecipients != null) {
-                carbonCopyRecipients.forEach(ccr -> validateRecipientIsPresentOnlyOnce(carbonCopyRecipients, ccr));
-                validateRecipientIsNotPresentInAnotherList(carbonCopyRecipients, recipient);
-            }
-            if (blindCarbonCopyRecipients != null) {
-                blindCarbonCopyRecipients.forEach(bccr -> validateRecipientIsPresentOnlyOnce(blindCarbonCopyRecipients, bccr));
-                validateRecipientIsNotPresentInAnotherList(blindCarbonCopyRecipients, recipient);
-            }
-            if (carbonCopyRecipients != null && blindCarbonCopyRecipients != null) {
-                carbonCopyRecipients.forEach(ccr -> validateRecipientIsNotPresentInAnotherList(blindCarbonCopyRecipients, ccr));
-            }
-        });
-    }
-
-    private void validateRecipientIsPresentOnlyOnce(List<String> recipientList, String recipient) {
-        int frequency = Collections.frequency(recipientList, recipient);
-        if (frequency > 1) {
-            throwEmailServiceException(recipient);
+        if (!duplicates.isEmpty()) {
+            throwEmailServiceException(duplicates);
         }
     }
 
-    private void validateRecipientIsNotPresentInAnotherList(List<String> recipientList, String recipient) {
-        if (recipientList.contains(recipient)) {
-            throwEmailServiceException(recipient);
-        }
+    private Stream<String> toStream(Optional<List<String>> optional) {
+        return optional.map(Collection::stream).orElseGet(Stream::empty);
     }
 
-    private void throwEmailServiceException(String recipient) {
-        Map<String, Object> errorVariable = new HashMap<>();
-        errorVariable.put("First duplicated element:", recipient);
+    private void throwEmailServiceException(Set<String> duplicatedRecipients) {
+        Map<String, Object> errorVariable = ImmutableMap.of("Duplicates", duplicatedRecipients);
         ErrorDetailsDto errorDetailsDto = new ErrorDetailsDto(HttpStatus.BAD_REQUEST,
                 "Each email address must be unique between the recipients, carbonCopyRecipients and blindCarbonCopyRecipients.", errorVariable);
         throw new EmailServiceException(errorDetailsDto);

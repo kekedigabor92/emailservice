@@ -79,16 +79,25 @@ class EmailValidatorTest extends Specification {
         then:
         def e = thrown(EmailServiceException)
         e.errorDetailsDto.httpStatus == HttpStatus.BAD_REQUEST
+        e.errorDetailsDto.errorVariable
+        !e.errorDetailsDto.errorVariable.isEmpty()
+        Set<String> duplicates = e.errorDetailsDto.errorVariable.get("Duplicates")
+        duplicates.size() == expectedDuplicatesSize
 
         where:
-        recipients                                   | ccr                              | bccr
-        ["recipient@test.com", "recipient@test.com"] | []                               | []
-        ["recipient@test.com"]                       | ["recipient@test.com"]           | []
-        ["recipient@test.com"]                       | ["ccr@test.com"]                 | ["recipient@test.com"]
-        ["recipient@test.com"]                       | ["ccr@test.com"]                 | ["ccr@test.com"]
+        recipients                                   | ccr                               | bccr                                    | expectedDuplicatesSize
+        ["recipient@test.com", "recipient@test.com"] | []                                | []                                      | 1
+        ["recipient@test.com"]                       | ["recipient@test.com"]            | []                                      | 1
+        ["recipient@test.com"]                       | ["ccr@test.com"]                  | ["recipient@test.com"]                  | 1
+        ["recipient@test.com"]                       | ["ccr@test.com"]                  | ["ccr@test.com"]                        | 1
 
-        ["recipient@test.com", "recipient@test.com"] | []                               | []
-        ["recipient@test.com"]                       | ["ccr@test.com", "ccr@test.com"] | []
-        ["recipient@test.com"]                       | []                               | ["bccr@test.com", "bccr@test.com"]
+        ["recipient@test.com", "recipient@test.com"] | []                                | []                                      | 1
+        ["recipient@test.com"]                       | ["ccr@test.com", "ccr@test.com"]  | []                                      | 1
+
+        ["recipient@test.com"]                       | ["recipient@test.com"]            | ["bccr@test.com", "bccr@test.com"]      | 2
+        ["recipient@test.com"]                       | ["ccr@test.com", "bccr@test.com"] | ["ccr@test.com", "bccr@test.com"]       | 2
+
+        ["recipient@test.com", "recipient@test.com"] | ["ccr@test.com", "ccr@test.com"]  | ["bccr@test.com", "bccr@test.com"]      | 3
+        ["recipient@test.com", "ccr@test.com"]       | ["ccr@test.com", "bccr@test.com"] | ["recipient@test.com", "bccr@test.com"] | 3
     }
 }

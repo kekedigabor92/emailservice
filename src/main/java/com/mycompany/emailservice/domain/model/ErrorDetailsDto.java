@@ -33,4 +33,7 @@ public class ErrorDetailsDto {
         return message;
     }
 
+    public Map<String, Object> getErrorVariable() {
+        return errorVariable;
+    }
 }

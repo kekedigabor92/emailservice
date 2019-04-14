@@ -1,5 +1,6 @@
 package com.mycompany.emailservice.service.impl;
 
+import com.google.common.collect.ImmutableMap;
 import com.mycompany.emailservice.client.EmailClient;
 import com.mycompany.emailservice.domain.model.EmailDto;
 import com.mycompany.emailservice.domain.model.ErrorDetailsDto;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -53,12 +55,14 @@ public class EmailServiceImpl implements EmailService {
     }
 
     private void checkResponse(Response response) {
-        if (response == null || HttpStatus.ACCEPTED.value() != response.getStatusCode()) {
-            Map<String, Object> errorVariables = new HashMap<>();
-            errorVariables.put("Response from email service provider: ", response);
-            ErrorDetailsDto errorDetailsDto = new ErrorDetailsDto(HttpStatus.INTERNAL_SERVER_ERROR, "Sending email was not successful. Please try again.", errorVariables);
-            throw new EmailServiceException(errorDetailsDto);
-        }
+        Optional.ofNullable(response)
+                .map(Response::getStatusCode)
+                .map(HttpStatus::valueOf)
+                .filter(HttpStatus.ACCEPTED::equals)
+                .orElseThrow(() -> new EmailServiceException(new ErrorDetailsDto(
+                        HttpStatus.INTERNAL_SERVER_ERROR,
+                        "Sending email was not successful. Please try again.",
+                        ImmutableMap.of("Response from email service provider: ", response != null ? response : "null"))));
     }
 
     private void propagateException(IOException ex) {
