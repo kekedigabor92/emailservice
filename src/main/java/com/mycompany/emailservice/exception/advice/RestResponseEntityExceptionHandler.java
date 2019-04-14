@@ -42,7 +42,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-
         Map<String, Object> errorVariables = new HashMap<>();
         errorVariables.put("exceptionMessage", ex.getMessage());
         ErrorDetailsDto errorDetailsDto = new ErrorDetailsDto(status, "JSON parse error. Cannot deserialize body.", errorVariables);
