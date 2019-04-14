@@ -2,7 +2,7 @@ package com.mycompany.emailservice.domain.validator;
 
 import com.mycompany.emailservice.domain.model.EmailDto;
 import com.mycompany.emailservice.domain.model.ErrorDetailsDto;
-import com.mycompany.emailservice.exception.EmailServiceValidationException;
+import com.mycompany.emailservice.exception.EmailServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +29,7 @@ public class EmailValidator {
 
         if (recipientSize + carbonCopyRecipientSize + blindCarbonCopyRecipientSize > TOTAL_RECIPIENTS_LIMIT) {
             ErrorDetailsDto errorDetailsDto = new ErrorDetailsDto(HttpStatus.BAD_REQUEST, TOTAL_RECIPIENTS_EXCEEDED + TOTAL_RECIPIENTS_LIMIT, null);
-            throw new EmailServiceValidationException(errorDetailsDto);
+            throw new EmailServiceException(errorDetailsDto);
         }
     }
 
@@ -73,6 +73,6 @@ public class EmailValidator {
         errorVariable.put("First duplicated element:", recipient);
         ErrorDetailsDto errorDetailsDto = new ErrorDetailsDto(HttpStatus.BAD_REQUEST,
                 "Each email address must be unique between the recipients, carbonCopyRecipients and blindCarbonCopyRecipients.", errorVariable);
-        throw new EmailServiceValidationException(errorDetailsDto);
+        throw new EmailServiceException(errorDetailsDto);
     }
 }

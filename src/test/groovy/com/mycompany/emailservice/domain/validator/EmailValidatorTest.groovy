@@ -1,7 +1,7 @@
 package com.mycompany.emailservice.domain.validator
 
 import com.mycompany.emailservice.domain.model.EmailDto
-import com.mycompany.emailservice.exception.EmailServiceValidationException
+import com.mycompany.emailservice.exception.EmailServiceException
 import org.springframework.http.HttpStatus
 import spock.lang.Shared
 import spock.lang.Specification
@@ -60,7 +60,7 @@ class EmailValidatorTest extends Specification {
         emailValidator.validateEmail(email)
 
         then:
-        def e = thrown(EmailServiceValidationException)
+        def e = thrown(EmailServiceException)
         e.errorDetailsDto.httpStatus == HttpStatus.BAD_REQUEST
         e.errorDetailsDto.message == EmailValidator.TOTAL_RECIPIENTS_EXCEEDED + EmailValidator.TOTAL_RECIPIENTS_LIMIT
     }
@@ -77,7 +77,7 @@ class EmailValidatorTest extends Specification {
         emailValidator.validateEmail(email)
 
         then:
-        def e = thrown(EmailServiceValidationException)
+        def e = thrown(EmailServiceException)
         e.errorDetailsDto.httpStatus == HttpStatus.BAD_REQUEST
 
         where:

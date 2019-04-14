@@ -2,11 +2,11 @@ package com.mycompany.emailservice.exception;
 
 import com.mycompany.emailservice.domain.model.ErrorDetailsDto;
 
-public class EmailServiceValidationException extends RuntimeException {
+public class EmailServiceException extends RuntimeException {
 
     private ErrorDetailsDto errorDetailsDto;
 
-    public EmailServiceValidationException(ErrorDetailsDto errorDetailsDto) {
+    public EmailServiceException(ErrorDetailsDto errorDetailsDto) {
         this.errorDetailsDto = errorDetailsDto;
     }
 
