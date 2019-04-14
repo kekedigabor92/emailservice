@@ -8,8 +8,8 @@ services:
 before_install:
   - chmod +x mvnw
 
-install:
-./mvnw install -Dmaven.javadoc.skip=true -B -V
+script:
+  - ./mvnw clean install -B
 
 cache:
   directories:
