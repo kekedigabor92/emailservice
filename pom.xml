@@ -22,6 +22,7 @@
         <cglib.nodep.version>3.2.0</cglib.nodep.version>
         <org.objenesis.version>2.1</org.objenesis.version>
         <groovy.modules.http-builder.version>0.7.1</groovy.modules.http-builder.version>
+        <build.helper.maven.plugin.version>1.12</build.helper.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -99,7 +100,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.12</version>
+                <version>${build.helper.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>add-test-source</id>
@@ -125,9 +126,27 @@
                         <include>**/*Test.*</include>
                     </includes>
                     <excludes>
-                        <exclude>com.mycompany.emailservice.integration.*</exclude>
+                        <exclude>**/*IT.*</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*IT.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>failsafe-integration-tests</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -23,7 +23,11 @@ mvn spring-boot:run
 
 ## Testing the application locally
 
-The EmailServiceApplicationIT class file contains integration tests that can be easily run from the IDEA. 
+The EmailServiceApplicationIT class file contains integration tests that can be easily run from the IDEA or using command line.
+
+```shell
+mvn integration-test
+``` 
 
 Alternatively you can use the POSTemails.http for manual testing.
 It is a nice option as you do not have leave the IDEA to fire a request.
